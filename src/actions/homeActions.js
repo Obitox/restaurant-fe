@@ -1,4 +1,4 @@
-import api from '../superagent/api';
+import * as api from '../superagent/api';
 
 export const HOME_DATA_FETCH_REQUEST = 'HOME_DATA_FETCH_REQUEST ';
 export const HOME_DATA_FETCH_SUCCESS = 'HOME_DATA_FETCH_SUCCESS';
@@ -38,26 +38,30 @@ const homeDataFetchError = (status) => {
 }
 
 const homeDataFetchCancelled = (status) => {
-    // TODO: Finish fetch cancelled
     return {
-        type: 'HOME_DATA_FETCH_CANCELLED'
+        type: 'HOME_DATA_FETCH_CANCELLED',
+        status
     }
 }
 
-export const fetchHomeData = () => dispatch => {
+export function fetchHomeData(){
     return async dispatch => {
         dispatch(homeDataFetchRequest('REQUEST'));
-
-        const data = await api.fetchData(`/home`);
-        // TODO: Finish fetch home data
+        
+        const response = await api.fetchData(`/home`);
+        dispatch(processResponse(response));
     }
 }
 
-// TODO: Finish process data
-const processData = (data) => {
-    if(data.length > 0){
-        dispatch(homeDataFetchSuccess('SUCCESS', data))
-    } else {
-
+function processResponse(response){
+    return async dispatch => {
+        if(response.error && response.status === 404)
+            dispatch(homeDataFetchError('ERROR'));
+        else if(response.error)
+            dispatch(homeDataFetchError('ERROR'));
+        else if(response.body.length === 0)
+            dispatch(homeDataFetchNoData('NO DATA')); 
+        else if(response.body.length > 0)
+            dispatch(homeDataFetchSuccess('SUCCESS', response.body));
     }
 }
