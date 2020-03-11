@@ -11,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
@@ -22,12 +23,15 @@
   },
   "dependencies": {
     "connected-react-router": "^6.7.0",
+    "core-js": "^3.6.4",
     "history": "^4.10.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.3",
     "superagent": "^5.2.2"
   }
 }
