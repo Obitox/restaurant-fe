@@ -1,12 +1,12 @@
 import * as api from '../superagent/api';
 
-export const HOME_DATA_FETCH_REQUEST = 'HOME_DATA_FETCH_REQUEST ';
+export const HOME_DATA_FETCH_REQUEST = 'HOME_DATA_FETCH_REQUEST';
 export const HOME_DATA_FETCH_SUCCESS = 'HOME_DATA_FETCH_SUCCESS';
-export const HOME_DATA_FETCH_NO_DATA = 'HOME_DATA_FETCH_NO_DATA ';
+export const HOME_DATA_FETCH_NO_DATA = 'HOME_DATA_FETCH_NO_DATA';
 export const HOME_DATA_FETCH_ERROR = 'HOME_DATA_FETCH_ERROR';
 export const HOME_DATA_FETCH_CANCELLED = 'HOME_DATA_FETCH_CANCELLED';
 
-const homeDataFetchRequest = (status) => {
+export const homeDataFetchRequest = (status) => {
    return {
        type: 'HOME_DATA_FETCH_REQUEST',
        status
@@ -37,7 +37,7 @@ const homeDataFetchError = (status) => {
     }
 }
 
-const homeDataFetchCancelled = (status) => {
+export const homeDataFetchCancelled = (status) => {
     return {
         type: 'HOME_DATA_FETCH_CANCELLED',
         status
@@ -46,14 +46,12 @@ const homeDataFetchCancelled = (status) => {
 
 export function fetchHomeData(){
     return async dispatch => {
-        dispatch(homeDataFetchRequest('REQUEST'));
-        
         const response = await api.fetchData(`/home`);
         dispatch(processResponse(response));
     }
 }
 
-function processResponse(response){
+export function processResponse(response){
     return async dispatch => {
         if(response.error && response.status === 404)
             dispatch(homeDataFetchError('ERROR'));
