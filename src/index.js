@@ -11,6 +11,9 @@ import configureStore, { history } from './configureStore';
 
 import Home from './containers/Home';
 
+// Styling
+import './styles/style.scss';
+
 const store = configureStore(/* provide initial state if any */)
 
 ReactDOM.render(
@@ -19,7 +22,7 @@ ReactDOM.render(
       <> { /* your usual react-router v4/v5 routing */ }
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route render={() => (<div>Miss</div>)} />
+          <Route path="/switch" render={() => (<div>Miss</div>)} />
         </Switch>
       </>
     </ConnectedRouter>
