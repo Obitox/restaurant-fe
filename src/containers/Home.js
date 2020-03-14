@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchHomeData } from '../actions/homeActions';
+import  { homeDataFetchRequest, homeDataFetchCancelled } from '../actions/homeActions';
 import ItemList from '../components/ItemList';
 
 const mapStateToProps = state => {
@@ -13,13 +13,23 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchData: () => dispatch(fetchHomeData())
+        fetchDataRequest: () => dispatch(homeDataFetchRequest('REQUEST')),
+        fetchDataCancel: () => dispatch(homeDataFetchCancelled('CANCELLED'))
     };
 }
 
 class Home extends Component {
     componentDidMount = () => {
-        this.props.fetchData();
+        this.props.fetchDataRequest();
+    }
+
+    componentWillUnmount = () => {
+        if(this.props.status === "REQUEST")
+            this.props.fetchDataCancel();
+    }
+
+    routeSwitch = () => {
+        this.props.history.push('/switch');
     }
 
     render() {
@@ -44,6 +54,9 @@ class Home extends Component {
 
         return (
             <div>
+                <button type="button" onClick={this.routeSwitch}>
+                    Switch route
+                </button>
                 {component}
             </div>
         );
