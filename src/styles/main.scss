@@ -1,0 +1,30 @@
+.main {
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+    grid-template-rows: repeat(2, auto);
+
+    
+    .items {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 30px auto;
+    }
+    
+    .item-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(150px, max-content));
+        grid-template-rows: auto;
+    }
+}
+
+// .dark {
+//     background-color: black;
+//     color: white;
+//     transition: background-color 0.3s, color 0.3s;
+// }
+
+// .light {
+//     // background-color: white;
+//     // color: black;
+//     // transition: background-color 0.3s, color 0.3s;
+// }

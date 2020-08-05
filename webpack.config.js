@@ -1,6 +1,13 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
+  devServer: {
+    historyApiFallback: true
+  },
+  externals: {
+    'Config': JSON.stringify(require('./config.json'))
+  },
   module: {
     rules: [
       {
@@ -31,6 +38,17 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
         ], 
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
       },
     ]
   },

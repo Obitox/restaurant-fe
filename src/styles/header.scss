@@ -1,0 +1,17 @@
+.header {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50% 50%;
+
+    .heading {
+        display: inline-flex;
+        justify-content: space-between;
+
+        .heading-logged-in, .heading.logged-out {
+            display: inline-flex;
+        }
+    }
+
+    // .nav-menu {
+    // }
+}
